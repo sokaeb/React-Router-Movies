@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MovieList = props => {
-
-  const { url } = useRouteMatch()
 
   return (
     <div className="movie-list">
       {props.movies.map(movie => (
-       <Link to={`${url}/${movie.id}`}>
+       <Link to={`/movies/${movie.id}`} key={movie.id}>
         <MovieDetails key={movie.id} movie={movie} />
        </Link>
       ))}
@@ -19,6 +17,7 @@ const MovieList = props => {
 function MovieDetails({ movie }) {
   const { title, director, metascore } = movie;
   return (
+    // <Link to={`/movies/${movie.id}`} key={movie.id}>
     <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
@@ -28,7 +27,10 @@ function MovieDetails({ movie }) {
         Metascore: <strong>{metascore}</strong>
       </div>
     </div>
+    //  </Link>
   );
 }
 
 export default MovieList;
+
+// the <Link> can be wrapped around MovieDetails or the indv movie-card divs inside the MovieDetails function
